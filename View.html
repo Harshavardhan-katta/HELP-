@@ -1,0 +1,64 @@
+-- Active: 1758514538901@@127.0.0.1@3306@mysql
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Welcome to HELP!</title>
+  <link rel="stylesheet" href="Help.css">
+
+</head>
+<body>
+  
+ <header>
+    <div class="header-flex">
+        <img src="helplogo.png" alt="Help! Logo" class="logo" >
+        
+        <div class="header-title-nav">
+  <nav class="main-menu">
+                <a href="index.html" class="menu-link active">Home</a>
+                <a href="Found.html" class="menu-link">Report Found</a>
+                <a href="lost.html" class="menu-link">Report lost</a>
+                  <a href="View.html" class="menu-link">View Found</a>
+                <a href="contact.html" class="menu-link">Contact</a>
+                
+                <button class="Agentlogin" onclick="window.location.href='AgentLogin.html'">
+                  Agent Login</button>
+            </nav>
+            
+        </div>
+    </div>
+</header>
+
+
+  
+  <script src="script.js"></script>
+<div class="form-container">
+  <h2>All Found Items</h2>
+  <div id="foundItemsList"></div>
+</div>
+<script>
+function displayFoundItems() {
+  const foundItems = JSON.parse(localStorage.getItem('foundItems') || '[]');
+  const listDiv = document.getElementById('foundItemsList');
+  if (foundItems.length === 0) {
+    listDiv.innerHTML = "<p>No items found yet.</p>";
+    return;
+  }
+  listDiv.innerHTML = foundItems.map(item => `
+  <div class="found-card">
+    <strong>Item:</strong> ${item.name}<br>
+    <strong>Description:</strong> ${item.description}<br>
+    <strong>Found Location:</strong> ${item.location}<br>
+    <strong>HelpDesk:</strong> ${item.helpdesk}<br>
+    <strong>Contact Email:</strong> <a href="mailto:${item.email}">${item.email}</a>
+  </div>
+`).join('');
+}
+displayFoundItems();
+</script>
+<footer>
+  <p>&copy; 2025  HELP! All rights reserved.</p>
+  <p>Contact us <a href="contact.html">here</a></p>
+</footer>
+</body>
+</html>
+
